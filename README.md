@@ -1,12 +1,12 @@
 # Summary
 
 This repository contains code for Door2Door company Data Lake and Data Warehouse projects.
-
 Contents:
 - AWS Glue Job Data Lake loader script (/glue).
 - DBT code for Data Warehouse management (/dbt).
+- AWS infrastructure Terraform code (/terraform).
 
-<br><br>
+<br>
 
 # Infrastructure Overview
 
@@ -50,9 +50,10 @@ A Glue trigger which executes the Job with yesterday's date as a parameter which
 Parameter | Description | Mandatory | Default Value
 --- | --- | --- | --- | 
 --date | Date by which input data will be filtered | false | yesterdays date in format of '2019-06-01'
---input-bucket | Name of the input bucket | true | -
---output-bucket | Name of the output bucket | true | -
-
+--input_bucket | Name of the input bucket | true | -
+--input_bucket_key | Name of the folder where input files are stored | true | -
+--output_datacatalog_database | Name of the output Data Catalog database | true | -
+--output_datacatalog_table| Name of the output Data Catalog table | true | -
 
 <br>
 
@@ -96,3 +97,11 @@ DBT code is deployed on DBT cloud where it is scheduled to refresh the tables on
 Table definition and relations are explained in more detail in DBT documentation: https://cloud.getdbt.com/accounts/12852/jobs/209477/docs/#!/overview
 
 <br>
+
+<br>
+
+## Terraform
+
+<br>
+
+Terraform is used to deploy services in AWS. Most of the infrastructure is included in the scripts, except Data Lake bucket and the catalog which were previously manually integrated with Snowflake so rebuilding this would be time-consuming.
