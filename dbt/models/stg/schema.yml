@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: registration_events_grouped
+    description: "Helper table containing Registration events joined by the following De-registration event. Table is incrementally updated each dbt run."
+    columns:
+      - name: data_id
+        description: "ID of the Vehicle in the source system."
+        tests:
+          - not_null
+      - name: register_event_at
+        description: "Time when an register event ocurred."
+        tests:
+          - not_null
+      - name: deregister_event_at
+        description: "Time when the first next de-register event ocurred."
+      - name: _unique_key
+        description: "System field used by dbt to be able to update existing rows."
+        tests:
+          - unique
+          - not_null
+
+  - name: vehicle_iot_data_parsed
+    description: "Contains all vehicle IOT events fetched from External table and unwrapped from JSON object."
+    columns:
+      - name: event
+        description: "Event type. Value either create, delete, update, register or deregister."
+        tests:
+          - not_null
+      - name: event_on
+        description: "Indicates on which entity the event occurred."
+        tests:
+          - not_null
+      - name: event_at
+        description: "Time when event ocurred."
+      - name: data_id
+        description: "ID of the entity in the event."
+      - name: data_location_lat
+        description: "If the event is on Vehicle location entity this field will have a value and represents the Lat location coordinate."
+      - name: data_location_lng
+        description: "If the event is on Vehicle location entity this field will have a value and represents the Lng location coordinate."
+      - name: data_location_at
+        description: "If the event is on Vehicle location entity this field will have a value and represents the time when event was emitted."
+      - name: data_start
+        description: "If the event is on Operating Period entity this field will have a value and represents the Operating Period start time."
+      - name: data_finish
+        description: "If the event is on Operating Period entity this field will have a value and represents the Operating Period finish time."

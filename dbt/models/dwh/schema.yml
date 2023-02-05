@@ -17,3 +17,80 @@ models:
         description: "Operating Period start time."
       - name: operating_period_finish_time
         description: "Operating Period finish time."
+
+  - name: dim_vehicle
+    description: "Dimension table containing information about Vehicles emitting data."
+    columns:
+      - name: vehicle_key
+        description: "Unique Vehicle Key."
+        tests:
+          - unique
+          - not_null
+      - name: vehicle_source_id
+        description: "ID of the Vehicle in the source system."
+        tests:
+          - not_null
+
+  - name: fact_registration
+    description: "Fact table containing Registration events of Vehicles from Operation Periods. Table is incrementally updated each dbt run."
+    columns:
+      - name: registration_key
+        description: "Unique Registration Key."
+        tests:
+          - unique
+          - not_null
+      - name: operating_period_key
+        description: "Operating Period Key for this Registration."
+        tests:
+          - not_null
+      - name: registration_time
+        description: "Time when Registration ocurred."
+        tests:
+          - not_null
+
+  - name: fact_deregistration
+    description: "Fact table containing De-registration events of Vehicles from Operation Periods. Table is incrementally updated each dbt run."
+    columns:
+      - name: deregistration_key
+        description: "Unique De-registration Key."
+        tests:
+          - unique
+          - not_null
+      - name: operating_period_key
+        description: "Operating Period Key of the matching the latest Registration."
+        tests:
+          - not_null
+      - name: deregistration_time
+        description: "Time when De-registration ocurred."
+        tests:
+          - not_null
+
+  - name: fact_vehicle_location
+    description: "Fact table containing location coordinates emitted from the Vehicles. Table is incrementally updated each dbt run."
+    columns:
+      - name: vehicle_location_key
+        description: "Unique Vehicle location Key."
+        tests:
+          - unique
+          - not_null
+      - name: vehicle_key
+        description: "Vehicle Key."
+        tests:
+          - not_null
+      - name: operating_period_key
+        description: "Operating Period Key of the matching the latest Registration."
+        tests:
+          - not_null
+      - name: vehicle_location_lat
+        description: "Latitude coordinate value emitted by the Vehicle."
+        tests:
+          - not_null
+      - name: vehicle_location_lng
+        description: "Longitude coordinate value emitted by the Vehicle."
+        tests:
+          - not_null
+      - name: vehicle_location_time
+        description: "Time when location was emitted by the Vehicle."
+        tests:
+          - not_null
+
