@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_operating_period
+    description: "Dimension table containing Operating Period information."
+    columns:
+      - name: operating_period_key
+        description: "Unique Operating Period Key."
+        tests:
+          - unique
+          - not_null
+      - name: operating_period_source_id
+        description: "ID of the Operating Period in the source system."
+        tests:
+          - not_null
+      - name: operating_period_start_time
+        description: "Operating Period start time."
+      - name: operating_period_finish_time
+        description: "Operating Period finish time."
