@@ -31,6 +31,19 @@ models:
         tests:
           - not_null
 
+  - name: dim_organization
+    description: "Dimension table containing information about Organizations."
+    columns:
+      - name: organization_key
+        description: "Unique Organization Key."
+        tests:
+          - unique
+          - not_null
+      - name: organization_source_id
+        description: "ID of the Organization in the source system."
+        tests:
+          - not_null
+
   - name: fact_registration
     description: "Fact table containing Registration events of Vehicles from Operation Periods. Table is incrementally updated each dbt run."
     columns:
@@ -41,6 +54,10 @@ models:
           - not_null
       - name: operating_period_key
         description: "Operating Period Key for this Registration."
+        tests:
+          - not_null
+      - name: organization_key
+        description: "Organization Key."
         tests:
           - not_null
       - name: registration_time
@@ -58,6 +75,10 @@ models:
           - not_null
       - name: operating_period_key
         description: "Operating Period Key of the matching the latest Registration."
+        tests:
+          - not_null
+      - name: organization_key
+        description: "Organization Key."
         tests:
           - not_null
       - name: deregistration_time
@@ -79,6 +100,10 @@ models:
           - not_null
       - name: operating_period_key
         description: "Operating Period Key of the matching the latest Registration."
+        tests:
+          - not_null
+      - name: organization_key
+        description: "Organization Key."
         tests:
           - not_null
       - name: vehicle_location_lat

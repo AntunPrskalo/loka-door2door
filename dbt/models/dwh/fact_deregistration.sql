@@ -8,6 +8,7 @@ with events as (
     SELECT
         r.data_id,
         r.deregister_event_at,
+        r.organization_id,
         op.operating_period_key
     FROM {{ ref('registration_events_grouped') }} r
     LEFT JOIN {{ ref('dim_operating_period') }} op
@@ -21,6 +22,7 @@ with events as (
 SELECT
     {{ dbt_utils.generate_surrogate_key([ 'data_id', 'deregister_event_at' ]) }} as deregistration_key,
     operating_period_key,
+    {{ dbt_utils.generate_surrogate_key([ 'organization_id' ]) }} as organization_key,
     deregister_event_at as deregistration_time
 FROM events
 

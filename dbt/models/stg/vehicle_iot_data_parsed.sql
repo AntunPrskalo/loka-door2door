@@ -26,5 +26,6 @@ SELECT
     data:"location":"lng"::FLOAT as data_location_lng,
     data:"location":"at"::TIMESTAMP as data_location_at,
     data:"start"::TIMESTAMP as data_start,
-    data:"finish"::TIMESTAMP as data_finish
+    data:"finish"::TIMESTAMP as data_finish,
+    organization_id
 FROM events

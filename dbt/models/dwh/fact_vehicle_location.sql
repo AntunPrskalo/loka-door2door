@@ -11,6 +11,7 @@ with locations as (
         e.data_location_lat,
         e.data_location_lng,
         e.data_location_at,
+        e.organization_id,
         op.operating_period_key
     FROM {{ ref('vehicle_iot_data_parsed') }} e
     INNER JOIN {{ ref('registration_events_grouped') }} r
@@ -27,6 +28,7 @@ SELECT
     {{ dbt_utils.generate_surrogate_key([ 'data_id',  'data_location_lat', 'data_location_lng', 'data_location_at' ]) }} as vehicle_location_key,
     {{ dbt_utils.generate_surrogate_key([ 'data_id' ]) }} as vehicle_key,
     operating_period_key,
+    {{ dbt_utils.generate_surrogate_key([ 'organization_id' ]) }} as organization_key,
     data_location_lat as vehicle_location_lat,
     data_location_lng as vehicle_location_lng,
     data_location_at as vehicle_location_time

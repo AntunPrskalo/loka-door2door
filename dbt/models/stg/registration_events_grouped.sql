@@ -12,6 +12,7 @@ with new_events as (
         data_id,
         event,
         event_at,
+        organization_id,
         LEAD(event_at) OVER (PARTITION BY data_id ORDER BY event_at) as next_event_at
     FROM {{ ref('vehicle_iot_data_parsed') }} e
     WHERE lower(event) in ('register', 'deregister')
@@ -26,6 +27,7 @@ with new_events as (
         data_id,
         event_at as register_event_at,
         next_event_at as deregister_event_at,
+        organization_id,
         {{ dbt_utils.generate_surrogate_key([ 'data_id', 'event_at' ]) }} as _unique_key
     FROM new_events
     WHERE lower(event) = 'register'
@@ -49,6 +51,7 @@ with new_events as (
             r.data_id,
             r.register_event_at,
             d.event_at as deregister_event_at,
+            organization_id,
             r._unique_key
         FROM {{ this }} r
         LEFT JOIN new_deregisters d ON
