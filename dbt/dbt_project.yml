@@ -42,4 +42,4 @@ models:
       +materialized: view
 
 on-run-start:
-  - "{{ recreate_external_source_tables() }}"
+  - "{{ refresh_source_external_tables() }}"

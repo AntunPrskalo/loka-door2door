@@ -75,6 +75,8 @@ Snowflake is used as a Data Warehouse database.
 
 Data from the Data Lake is not directly imported into the Data Warehouse. Instead a **STAGE** and **EXTERNAL TABLE** were created to make data available in Snowflake in an unstructured format. The table holds a single field called "VALUE" of type VARIANT which contains the JSON representation of the records in the Data Lake.
 
+Before each DBT rebuild External source tables need to be refreshed manually.
+
 External table VEHICLE_IOT_DATA resides in DOOR2DOOR_DWH database in RAW schema.
 
 To establish the integration between Snowflake and S3 this Guide was followed with all necessary resources created on both sides: https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html
