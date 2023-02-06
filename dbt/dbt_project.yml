@@ -40,3 +40,6 @@ models:
     dwh:
       schema: dwh
       +materialized: view
+
+on-run-start:
+  - "{{ recreate_external_source_tables() }}"

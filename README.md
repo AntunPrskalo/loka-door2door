@@ -16,8 +16,7 @@ Contents:
 
 <br>
 
-The schema above gives an overview of the data flow between the source and the Data Warehouse.
-Here is an explanation of each step in the flowchart:
+The schema above gives an overview of the data flow between the source and the Data Warehouse. Each step in the process is described sections below.
 
 <br>
 
@@ -95,8 +94,6 @@ DBT is used to define and build the tables in the Snowflake Data Warehouse based
 DBT code is deployed on the DBT cloud where it is scheduled to refresh the tables once a day.
 
 Table definition and relations are explained in more detail in DBT documentation: https://cloud.getdbt.com/accounts/12852/jobs/209477/docs/#!/overview
-
-<br>
 
 <br>
 

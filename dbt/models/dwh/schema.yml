@@ -17,6 +17,10 @@ models:
         description: "Operating Period start time."
       - name: operating_period_finish_time
         description: "Operating Period finish time."
+      - name: operating_period_is_deleted
+        description: "Is TRUE Operating Period is deleted."
+      - name: operating_period_deletion_time
+        description: "Deletion time of the Operating Period."
 
   - name: dim_vehicle
     description: "Dimension table containing information about Vehicles emitting data."
