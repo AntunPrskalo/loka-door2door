@@ -46,7 +46,7 @@ result = s3.list_objects(Bucket=bucket_name, Prefix=prefix)
 if result.get("Contents") == None:
     logger.info(f"Done. No files found with prefix: {prefix}")
     job.commit()
-    os._exit()
+    os._exit(0)
 
 s3_paths = [f"s3://{bucket_name}/{content['Key']}" for content in result.get("Contents")]
 
